@@ -4,7 +4,7 @@ import { LuCircleDot } from "react-icons/lu";
 
 const LeftSidebar = () => {
   return (
-    <div className="w-1/5 max-md:hidden h-screen place-items-center border-r border-solid border-gray-300">
+    <div className="w-1/5 shadow-lg max-md:hidden place-items-center border-r border-solid border-gray-300">
       <div className="flex items-center justify-between m-4">
         <a href={"/"} className="flex w-full gap-2 justify-center">
           <img

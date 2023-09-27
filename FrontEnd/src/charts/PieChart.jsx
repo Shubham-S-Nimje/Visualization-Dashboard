@@ -3,9 +3,9 @@ import * as d3 from "d3";
 // import data from "../../jsondata.json";
 import { useSelector } from "react-redux";
 
-const DonutChart = () => {
+const PieChart = () => {
   const [pieData, setPieData] = useState([]);
-  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedcountry, setSelectedcountry] = useState("");
   const data = useSelector((state) => state.data.data);
 
   const margin = { top: 20, right: 10, bottom: 60, left: 100 };
@@ -17,20 +17,17 @@ const DonutChart = () => {
 
   useEffect(() => {
     const formattedData = data
-      .filter((entry) => {
-        const endYear = entry.end_year.toString();
-        return endYear.startsWith(selectedYear) && entry.topic;
-      })
-      .filter((entry) => entry.end_year !== "");
+      .filter((d) => d.country && d.source)
+      .filter((d) => !selectedcountry || d.country === selectedcountry);
 
     const groupedData = d3.rollup(
       formattedData,
       (v) => v.length,
-      (entry) => entry.topic
+      (d) => d.source
     );
 
     setPieData([...groupedData.entries()]);
-  }, [selectedYear, data]);
+  }, [selectedcountry, data]);
 
   useEffect(() => {
     d3.select(svgRef.current).selectAll("*").remove();
@@ -88,35 +85,35 @@ const DonutChart = () => {
       .text((d) => `${d}`);
   }, [pieData]);
 
-  const uniqueYears = [
-    ...new Set(data.map((entry) => entry.end_year.toString())),
-  ].filter(Boolean);
-
   return (
     <div className="w-fit">
       <div className="flex justify-between text-center items-center">
         <div className="items-center m-2">
-          <h3 className="font-bold text-2xl">Topic</h3>
+          <h3 className="font-bold text-2xl">Country</h3>
         </div>
         <div className="m-2 shadow-lg flex-col bg-primary text-white py-1 px-2 rounded-md">
-          <span className="font-bold">Year :</span>
+          <span className="font-bold">Country:</span>
           <select
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-            className="m-1 text-center rounded-md text-primary"
+            value={selectedcountry}
+            className="my-1 mx-2 text-center rounded-md text-primary"
+            onChange={(e) => setSelectedcountry(e.target.value)}
           >
             <option value="">All</option>
-            {uniqueYears.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
+            {Array.from(new Set(data.map((d) => d.country)))
+              .filter((country) => country)
+              .map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
           </select>
         </div>
       </div>
-      <svg ref={svgRef}></svg>
+      <div className="flex justify-center">
+        <svg ref={svgRef}></svg>
+      </div>
     </div>
   );
 };
 
-export default DonutChart;
+export default PieChart;

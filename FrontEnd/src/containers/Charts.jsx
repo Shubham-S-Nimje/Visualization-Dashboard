@@ -6,40 +6,44 @@ import DonutChart from "../charts/DonutChart";
 import Histogram from "../charts/Histogram";
 import LineChart from "../charts/LineChart";
 import ScatterPlot from "../charts/ScatterPlot";
+import BubbleChart from "../charts/BubbleChart";
+import PieChart from "../charts/PieChart";
 
 const Charts = () => {
   return (
     <Fragment>
       <div className="flex flex-col w-full gap-4">
-        <div className="grid h-fit border rounded-md border-solid border-gray-300 place-items-center">
-          <ScatterPlot />
+        <div className="grid shadow-lg h-fit border rounded-md border-solid border-gray-300 place-items-center">
+          <LineChart />
         </div>
-        <div className="grid h-fit border rounded-md border-solid border-gray-300 place-items-center">
+        <div className="grid h-fit place-items-center">
+          <div className="flex flex-row w-full gap-4 lg:flex-row">
+            <div className="grid shadow-lg w-1/2 flex-grow border rounded-md border-solid border-gray-300 place-items-center">
+              <ScatterPlot />
+            </div>
+            <div className="grid shadow-lg w-1/2 flex-grow border rounded-md border-solid border-gray-300 place-items-center">
+              <PieChart />
+            </div>
+          </div>
+        </div>
+        <div className="grid shadow-lg h-fit border rounded-md border-solid border-gray-300 place-items-center">
+          <AreaChart />
+        </div>
+        <div className="grid shadow-lg h-fit border rounded-md border-solid border-gray-300 place-items-center">
           <BarChart />
         </div>
         <div className="grid h-fit place-items-center">
-          <div className="flex flex-col w-full gap-4 lg:flex-row">
-            <div className="grid flex-grow border rounded-md border-solid border-gray-300 place-items-center">
-              <AreaChart />
-            </div>
-            <div className="grid flex-grow border rounded-md border-solid border-gray-300 place-items-center">
+          <div className="flex flex-row w-full gap-4 lg:flex-row">
+            <div className="grid shadow-lg w-1/2 flex-grow border rounded-md border-solid border-gray-300 place-items-center">
               <DonutChart />
             </div>
+            <div className="grid shadow-lg w-1/2 flex-grow border rounded-md border-solid border-gray-300 place-items-center">
+              <BubbleChart />
+            </div>
           </div>
         </div>
-        <div className="grid h-fit border rounded-md border-solid border-gray-300 place-items-center">
+        <div className="grid shadow-lg h-fit border rounded-md border-solid border-gray-300 place-items-center">
           <Histogram />
-        </div>
-        <div className="grid h-fit place-items-center">
-          <div className="flex flex-col w-full gap-4 lg:flex-row">
-            <div className="grid flex-grow border rounded-md border-solid border-gray-300 place-items-center">
-              <LineChart />
-            </div>
-
-            <div className="grid flex-grow h-32  border rounded-md border-solid border-gray-300 place-items-center">
-              content
-            </div>
-          </div>
         </div>
       </div>
     </Fragment>

@@ -7,7 +7,7 @@ import { TbBell } from "react-icons/tb";
 
 const Header = () => {
   return (
-    <div className="navbar h-fit justify-between border border-solid text-gray-500 border-gray-300 px-4 py-0 rounded-md">
+    <div className="navbar shadow-lg h-fit justify-between border border-solid text-gray-500 border-gray-300 px-4 py-0 rounded-md">
       <div className="menu menu-horizontal p-0">
         <IoSearchOutline className="text-2xl" />
         <input
